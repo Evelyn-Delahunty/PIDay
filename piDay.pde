@@ -1,22 +1,38 @@
 String[] piArray;
 String objective = "";
-int targetDigits = 8;
+boolean inputDone = false;
 boolean found = false;
 
 void setup(){
-  noLoop();
   piArray = loadStrings("pi-tenmillion.txt");
   MyPi.setPi(piArray[0]);
-  for(long i = 0; i < (long)pow(10, targetDigits + 1); i++){
-    objective = Long.toString(i + (long)pow(10, targetDigits + 1));
-    int index = MyPi.findString(objective.substring(1), MyPi.pi, 0);
-    if(index != -1){
-      System.out.println("String " + objective.substring(1) + " found at: " + index);
-      found = true;
-      break;
+}
+
+void draw(){
+  if(inputDone){
+      int index = MyPi.findInPi(objective, 0);
+    if(index == -1){
+      System.out.println("not found");
     }
+    else{
+      System.out.println("String " + objective + " found at position " + index + ".");
+    }
+    noLoop();
   }
-  if(!found){
-    System.out.println("Nothing found");
+}
+
+void keyPressed(){
+  if(!inputDone){
+    if(key == ENTER){
+      inputDone = true;
+      System.out.println("Searching...");
+    }
+    else if(key == BACKSPACE && objective.length() > 0){
+      objective = objective.substring(0, objective.length() - 1);
+    }
+    else{
+      objective += key;
+      System.out.println("Current String: " + objective);
+    }
   }
 }

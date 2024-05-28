@@ -8,9 +8,9 @@ class MyPi{
     pi = inp;
   }
   
-  public static int findString(String inp, String comp, int start){
-    for(int i = start; i + inp.length() < comp.length(); i++){
-      if((comp.substring(i, i + inp.length())).equals(inp)){
+  public static int findInPi(String inp, int start){
+    for(int i = start; i + inp.length() < pi.length(); i++){
+      if((pi.substring(i, i + inp.length())).equals(inp)){
         return(i);
       }
     }
